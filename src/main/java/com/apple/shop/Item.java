@@ -5,26 +5,17 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.Getter;
+import lombok.Setter;
 
 @Entity
 @Getter
+@Setter
 public class Item {
   
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  private long id;
+  public Long id;
   private String title;
   private Integer price;
   
-  public void setId(long id) {
-    this.id = id;
-  }
-  
-  public void setTitle(String title) {
-    this.title = title;
-  }
-  
-  public void setPrice(Integer price) {
-    this.price = price;
-  }
 }
