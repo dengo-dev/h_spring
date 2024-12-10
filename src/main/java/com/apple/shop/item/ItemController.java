@@ -1,15 +1,14 @@
-package com.apple.shop;
+package com.apple.shop.item;
 
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Optional;
 
 @Controller
@@ -79,6 +78,15 @@ public class ItemController {
     
   }
   
+  @DeleteMapping("/item")
+  ResponseEntity<String> deleteItem(@RequestParam Long id){
+    itemRepository.deleteById(id);
+    return ResponseEntity.status(200).body("삭제완료");
+  }
+  
+  
+  
+  
   @GetMapping("/test1")
   public String test(@RequestParam String name,
                      @RequestParam Integer age) {
@@ -87,9 +95,13 @@ public class ItemController {
     return "redirect:/list";
   }
   
-  @DeleteMapping("/item")
-  ResponseEntity<String> deleteItem(@RequestParam Long id){
-    itemRepository.deleteById(id);
-    return ResponseEntity.status(200).body("삭제완료");
+  
+  
+  
+  @GetMapping("/test2")
+  String test2(){
+    String s = new BCryptPasswordEncoder().encode("문자");
+    System.out.println(s);
+    return "redirect:/list";
   }
 }
